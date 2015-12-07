@@ -7,6 +7,13 @@ type Array struct {
 	Data []string
 }
 
+// NewArrayFrom - initialize meta.Array with given strings
+func NewArrayFrom(values ...string) (output *Array) {
+	output = NewArray(len(values))
+	output.Add(values...)
+	return output
+}
+
 // NewArray - returns new instance to meta arrau
 func NewArray(size int) *Array {
 	return &Array{
@@ -15,8 +22,8 @@ func NewArray(size int) *Array {
 }
 
 // Add - adds link if not exist OR increments existing
-func (a *Array) Add(s string) {
-	a.Data = append(a.Data, s)
+func (a *Array) Add(s ...string) {
+	a.Data = append(a.Data, s...)
 }
 
 // Range - ranges over Data array returns index and existance
@@ -36,10 +43,15 @@ func (a *Array) Index(s string) int {
 	return index
 }
 
-// Exist - checks whether URL exists
+// Exist - checks whether item exists
 func (a *Array) Exist(s string) bool {
 	_, exist := a.Range(s)
 	return exist
+}
+
+// NotExist - check whether item not exits
+func (a *Array) NotExist(s string) bool {
+	return !a.Exist(s)
 }
 
 // Values - return map values as array
