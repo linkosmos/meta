@@ -1,6 +1,10 @@
 package meta
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 var addTests = []struct {
 	input    string
@@ -37,4 +41,12 @@ func TestSum(t *testing.T) {
 	if got != 103 {
 		t.Errorf("Expected sum %d, got %d", 103, got)
 	}
+}
+
+func TestContains(t *testing.T) {
+	m := NewMap(2)
+	m.Data["zz@zz"] = 100
+	m.Data["bbbb"] = 3
+	assert.True(t, m.Contains("@"))
+	assert.False(t, m.Contains("!"))
 }

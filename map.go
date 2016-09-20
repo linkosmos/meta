@@ -1,6 +1,9 @@
 package meta
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Map - stores map of links and count
 type Map struct {
@@ -70,4 +73,14 @@ func (m *Map) String() (output string) {
 		output += fmt.Sprintf("%s => %d\n", value, count)
 	})
 	return output
+}
+
+// Contains - whether map contents contains specified key
+func (m *Map) Contains(s string) bool {
+	for value, _ := range m.Data {
+		if strings.Contains(value, s) {
+			return true
+		}
+	}
+	return false
 }
